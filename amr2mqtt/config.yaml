@@ -1,0 +1,47 @@
+---
+name: AMR2MQTT (Edge)
+version: edge
+slug: amr2mqtt
+description: AMR2MQTT for Home Assistant (Edge)
+url: https://github.com/Alvarofg/addon-amr2mqtt
+image: ghcr.io/alvarofg/addon-amr2mqtt/amr2mqtt/{arch}
+arch:
+  - aarch64
+  - amd64
+init: false
+uart: true
+udev: true
+usb: true
+services:
+  - mqtt:want
+map:
+  - ssl
+options:
+  meters: []
+  mqtt: {}
+schema:
+  meters:
+    - id: int
+      protocol: list(idm|netidm|r900|scm|scm+)
+      name: str?
+      type: list(gas|water|energy)?
+      multiplier: float(0,)?
+      precision: int(0,)?
+      unit_of_measurement: str?
+      manufacturer: str?
+      model: str?
+  mqtt:
+    host: str?
+    port: port?
+    ca: str?
+    cert: str?
+    key: str?
+    username: str?
+    password: password?
+    client_id: str?
+    base_topic: match(^[^+#]{1,65535}$)?
+  log_level: list(trace|debug|info|notice|warning|error|fatal)?
+  home_assistant_discovery_enabled: bool?
+  home_assistant_discovery_prefix: match(^[^+#]{1,65535}$)?
+  last_seen: list(ISO_8601|ISO_8601_local|epoch)?
+  rtlamr_symbol_length: list(8|32|40|48|56|64|72|80|88|96)?
