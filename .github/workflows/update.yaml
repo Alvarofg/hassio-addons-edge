@@ -21,7 +21,6 @@ jobs:
             exit 1
           fi
           yq eval ".version = \"${version}\"" -i "${addon}/config.yaml"
-          yq eval ".image = \"ghcr.io/${repository}/${addon}/{arch}\"" -i "${addon}/config.yaml"
       - name: 🚀 Commit & push changes
         run: |
           git config user.email "github-actions@github.com"
