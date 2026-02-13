@@ -1,11 +1,9 @@
 ---
 name: Update
-
 on:
   repository_dispatch:
     types:
       - update
-
 jobs:
   update:
     name: 📢 Update ${{ github.event.client_payload.addon }}
@@ -13,25 +11,25 @@ jobs:
     steps:
       - name: ⤵️ Check out code from GitHub
         uses: actions/checkout@v4.1.0
-
       - name: ✏️ Update add-on version
         run: |
           addon="${{ github.event.client_payload.addon }}"
           version="${{ github.event.client_payload.version }}"
           repository="${{ github.event.client_payload.repository }}"
-
           if [[ ! -f "${addon}/config.yaml" ]]; then
             echo "::error ::Add-on ${addon} not found in this repository"
             exit 1
           fi
-
           yq eval ".version = \"${version}\"" -i "${addon}/config.yaml"
           yq eval ".image = \"ghcr.io/${repository}/${addon}/{arch}\"" -i "${addon}/config.yaml"
-
       - name: 🚀 Commit & push changes
         run: |
           git config user.email "github-actions@github.com"
           git config user.name "GitHub Actions"
           git add .
+          if git diff --staged --quiet; then
+            echo "Nothing to commit, skipping"
+            exit 0
+          fi
           git commit -m "Update ${{ github.event.client_payload.addon }} to ${{ github.event.client_payload.version }}"
           git push
