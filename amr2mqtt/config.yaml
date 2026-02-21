@@ -2,7 +2,7 @@
 # Source: https://github.com/Alvarofg/addon-amr2mqtt/blob/main/amr2mqtt/config.yaml
 ---
 name: AMR2MQTT (Edge)
-version: 65175a1
+version: 067c198
 slug: amr2mqtt
 description: AMR2MQTT for Home Assistant (Edge)
 url: https://github.com/Alvarofg/addon-amr2mqtt
