@@ -11,6 +11,12 @@ jobs:
     steps:
       - name: ⤵️ Check out code from GitHub
         uses: actions/checkout@v4.1.0
+      - name: ⬇️ Fetch latest config.yaml from source repo
+        run: |
+          addon="${{ github.event.client_payload.addon }}"
+          repository="${{ github.event.client_payload.repository }}"
+          curl -f -o "${addon}/config.yaml" \
+            "https://raw.githubusercontent.com/${repository}/main/${addon}/config.yaml"
       - name: ✏️ Update add-on version
         run: |
           addon="${{ github.event.client_payload.addon }}"
