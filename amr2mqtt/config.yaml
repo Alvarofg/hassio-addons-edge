@@ -1,12 +1,15 @@
+# Edge version - remember to manually sync schema changes from the source repo
+# Source: https://github.com/Alvarofg/addon-amr2mqtt/blob/main/amr2mqtt/config.yaml
 ---
-name: AMR2MQTT
-url: https://github.com/Alvarofg/addon-amr2mqtt
+name: AMR2MQTT (Edge)
 version: 65175a1
 slug: amr2mqtt
+description: AMR2MQTT for Home Assistant (Edge)
+url: https://github.com/Alvarofg/addon-amr2mqtt
+image: ghcr.io/alvarofg/amr2mqtt/{arch}
 arch:
   - aarch64
   - amd64
-description: AMR2MQTT for Home Assistant
 init: false
 uart: true
 udev: true
